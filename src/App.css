@@ -1,10 +1,75 @@
 .App {
+ margin-left: 10px;
+}
+
+.Panel {
+  width: 97%;
+  vertical-align: top;
+  margin: 3px;
+  display: table;
+  border-style: ridge;
+  border-color: azure;
+}
+
+.Panel:hover{
+  color: #282c34;
+  background-color: antiquewhite;
+}
+
+.Map{
+  width: 95%;
+  height: 95%;
+  margin: 2.5%;
+  border-style: ridge;
+  border-color: azure;
+}
+
+#overlay {
+  float: end; /* Sit on top of the page content */
+  height: 100%; /* Full height (cover the whole page) */
+  width: 100%;
+  text-align: left;
+  margin: 5px;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+}
+
+.Left{
+  float: left;
+  width: 450px;
+  height: 100vh;
+  overflow: scroll;
+  border: #282c34;
+}
+
+.Right{
+  float: end;
+  height: 100vh;
+  width: auto;
   text-align: center;
+  justify-content: center;
+  background-color: #cecccc;
+  border: #282c34;
+  display: flex;
+  flex-direction: column;
+}
+
+.centerImage{
+
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.Button{
+  width: 200px;
+  height: 40px;
+  border-radius: 4px;
+  color: white;
+  background-color: #282c34;
 }
 
 @media (prefers-reduced-motion: no-preference) {
