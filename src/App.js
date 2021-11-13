@@ -3,7 +3,7 @@ import './App.css';
 import React from "react";
 
 class App extends React.Component {
-    state = {type: 1, prev: 1}
+    state = {type: 1, prev: 1, current: 0}
     obj = -1;
 
     request() {
@@ -25,7 +25,7 @@ class App extends React.Component {
     }
 
     getName(i) {
-        console.log(this.get(i).name)
+        // console.log(this.get(i).name)
         return this.get(i).name
 
     }
@@ -64,24 +64,41 @@ class App extends React.Component {
                 </div>
             </div>
         )
-        else return (
+        else {
+            // console.log(this.state.current);
+            return (
                 <div className="Right">
                     <div id="overlay" onClick={() => this.setState({type: this.state.prev, prev: 3})}>
                         <div style={{textAlign: "center"}}><img className="centerImage" width={200} src={logo}
                                                                 alt={logo}></img></div>
                         <div style={{fontSize: 25, marginLeft: 10}}>
-                            {this.getName(i)}
+                            {this.getName(this.state.current)}
                         </div>
                         <br/>
                         <div style={{marginLeft: 10}}>
-                            {this.getAddress(i)}
+                            {this.getAddress(this.state.current)}
                             <br/>
-                            {this.getCity(i)}, {this.getState(i)} {this.getPostal(i)}
+                            {this.getCity(this.state.current)}, {this.getState(this.state.current)} {this.getPostal(this.state.current)}
                         </div>
                         <br/>
                     </div>
                 </div>
             )
+        }
+    }
+
+    handleClick(event) {
+        const id = event.target.id;
+
+        console.log(id);
+    }
+
+    delta() {
+        this.setState({
+            type : 3,
+            prev: this.state.type,
+            current: 1
+        });
     }
 
     render() {
@@ -90,7 +107,7 @@ class App extends React.Component {
         }
         var rows = [];
         var i = 0;
-        while (i < 5) {
+        while (i < this.obj.length) {
             rows.push(
                 <div className="Panel">
                     <div onClick={() => this.setState({type: 2, prev: this.state.type})}>
@@ -107,26 +124,28 @@ class App extends React.Component {
                         <br/>
                     </div>
                     <div className="App" style={{marginLeft: 7.5}}>
-                        <button className="Button"
+                        <button id={i} className="Button"
                                 onClick={() => this.setState({type: 1, prev: this.state.type})}>DIRECTIONS
                         </button>
-                        <button className="Button"
+                        <button id={i} className="Button"
                                 onClick={() => this.setState({type: 3, prev: this.state.type})}>MORE INFO
                         </button>
+                        {/*<button id={i} onClick={this.handleClick}>Button</button>*/}
+                        <button id="testID" onClick={this.delta.bind(this)}>+</button>
                     </div>
                 </div>
             )
             i++;
         }
-            return (
-                <div>
-                    <div className="Left">
-                        {rows}
-                    </div>
-                    {this.getRightPanel(i)}
+        return (
+            <div>
+                <div className="Left">
+                    {rows}
                 </div>
-            );
-        }
+                {this.getRightPanel(i-1)}
+            </div>
+        );
+    }
 
 }
 
