@@ -1,6 +1,9 @@
 .App {
  margin-left: 10px;
 }
+.AppIndent {
+  margin-left: 15%;
+}
 
 .Panel {
   width: 97%;
