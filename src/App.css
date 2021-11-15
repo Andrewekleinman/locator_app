@@ -55,9 +55,14 @@
   flex-direction: column;
 }
 
-.centerImage{
-
+.XButton{
+  width: 45px;
+  background-color: #cecccc;
+  margin-right: 10px;
+  margin-top: 5px;
 }
+
+
 
 .App-logo {
   height: 40vmin;
