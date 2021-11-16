@@ -47,7 +47,7 @@
 .Right{
   float: end;
   height: 100vh;
-  width: auto;
+  width: available;
   text-align: center;
   justify-content: center;
   background-color: #cecccc;

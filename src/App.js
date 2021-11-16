@@ -95,18 +95,16 @@ class App extends React.Component {
             return (
                 <div className="Right">
 
-                    {/*<div className="map-container">*/}
                         <Map bounds={withWidth(20)}
                             google={this.props.google}
                             className={"map"}
                             zoom={this.props.zoom}
                             initialCenter={this.props.center}
-                             style={{float: 'end', height:'100%',width:'auto', display: 'flex'}}
+                             style={{float: 'end', height:'100%',width:'70%', display: 'flex'}}
                         >
                             <Marker lat={this.getLat(this.state.current)}
                                     lng={this.getLong(this.state.current)}></Marker>
                         </Map>
-                    {/*</div>*/}
                 </div>
             )
         } else if (this.state.type === 3) {
@@ -159,8 +157,15 @@ class App extends React.Component {
             )
         }
     }
-    async statetransition(id) {
-        this.setState({type: 2, prev: 6, current: id})
+    async statetransition(id){
+        const prev = this.state.type;
+        if(this.state.type === 2) {
+                this.setState({type: 1, prev: prev, current: id})
+        }
+        setTimeout(()=>{
+            this.setState({type: 2, prev: prev, current: id})
+        },50)
+
     }
     handleClickMap = (event) => {
         const id = event.target.id;
@@ -243,4 +248,4 @@ class App extends React.Component {
 export default GoogleApiWrapper({
     apiKey: ('AIzaSyAGEZvGx3RgZ3rBZfxkOwtDuMqhgb1GunY')
 })(App)
-// 'AIzaSyAGEZvGx3RgZ3rBZfxkOwtDuMqhgb1GunY'
+
