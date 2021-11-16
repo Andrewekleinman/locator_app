@@ -2,8 +2,9 @@ import logo from './logo.svg';
 import xbutton from './xbutton.png'
 import './App.css';
 import React from "react";
-import GoogleMapReact from 'google-map-react';
+import GoogleMapReact, {fitBounds} from 'google-map-react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {withWidth} from "@material-ui/core";
 
 class App extends React.Component {
     state = {type: 1, prev: 1, current: 0}
@@ -93,17 +94,19 @@ class App extends React.Component {
             console.log(this.state)
             return (
                 <div className="Right">
-                    <div className="map-container">
-                        <Map
+
+                    {/*<div className="map-container">*/}
+                        <Map bounds={withWidth(20)}
                             google={this.props.google}
                             className={"map"}
                             zoom={this.props.zoom}
                             initialCenter={this.props.center}
+                             style={{float: 'end', height:'100%',width:'auto', display: 'flex'}}
                         >
                             <Marker lat={this.getLat(this.state.current)}
                                     lng={this.getLong(this.state.current)}></Marker>
                         </Map>
-                    </div>
+                    {/*</div>*/}
                 </div>
             )
         } else if (this.state.type === 3) {
@@ -156,17 +159,17 @@ class App extends React.Component {
             )
         }
     }
+    async statetransition(id) {
+        this.setState({type: 2, prev: 6, current: id})
+    }
     handleClickMap = (event) => {
         const id = event.target.id;
         if(id !== '') {
-            this.setState({type: 2, prev: 6, current: event.target.id})
+            this.statetransition(id)
         }
-        else console.log(id);
     }
     handleClickInfo = (event) => {
-        console.log(event.target.id);
         const id = event.target.id;
-        console.log(id);
         var prev = (this.state.type !== 3? this.state.type:this.state.prev)
         this.setState({type: 3, prev, current: id})
     }
@@ -203,8 +206,9 @@ class App extends React.Component {
             rows.push(
                 <div className="Panel">
                         <div id={i} className="App" onClick={this.handleClickMap}>
-                            {this.getName(i)}
-                            <br/><br/>
+                            <br/>
+                            <div style={{fontSize:25}}>{this.getName(i)}</div>
+                            <br/>
                             {this.getAddress(i)}
                             <br/>
                             {this.getCity(i)}, {this.getState(i)} {this.getPostal(i)}

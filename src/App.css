@@ -20,9 +20,7 @@
 }
 
 .Map{
-  width: 95%;
-  height: 95%;
-  margin: 2.5%;
+
   border-style: ridge;
   border-color: azure;
 }
